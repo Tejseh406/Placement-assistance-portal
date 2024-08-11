@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import Input from './input'; // Adjust the path based on your file structure
 import { toast } from 'react-toastify'; // For toast notifications
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const methods = useForm({
@@ -10,6 +10,16 @@ const Login = () => {
   });
 
   const navigate = useNavigate();
+
+  const [isMember,setIsMember] = useState();
+
+  const location = useLocation();
+
+  const { loginType } = location.state || {};
+
+  useEffect(() => {
+    setIsMember(loginType === 'member');
+  },[loginType])
 
   const {
     handleSubmit,
@@ -31,14 +41,14 @@ const Login = () => {
           <h2 className="text-2xl font-bold mb-4 text-center text-gray-700">Login</h2>
           <form onSubmit={handleSubmit(onSubmit)}>
             <Input
-              name="email"
-              type="email"
-              placeholder="Enter your email"
-              label="Email"
-              validation={{ 
+              name={isMember ? "email" : "name"}
+              type={isMember ? "email" : "text"}
+              placeholder={`Enter your ${isMember ?  "email" : "company name"} `}
+              label={isMember ? "Email" : 'Comapny name'}
+              validation={isMember ? { 
                 required: "Email is required",
                 pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: "Invalid email address" }
-              }}
+              } : {required: "Company name is required",}}
             />
             <Input
               name="password"
@@ -58,7 +68,7 @@ const Login = () => {
             </button>
             <p className="text-sm text-center text-gray-600 mt-4">
               Don't have an account?
-              <Link to="/signup" className="text-sm ms-2 text-blue-500 hover:underline">
+              <Link to="/signup" state={{ isMember }}  className="text-sm ms-2 text-blue-500 hover:underline">
                 Sign up
               </Link>
             </p>

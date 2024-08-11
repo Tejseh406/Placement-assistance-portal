@@ -12,7 +12,7 @@ const DropdownButton = () => {
 
   const handleSelection = (option) => {
     // Handle the navigation or action based on the selected option
-    navigate(option)
+    navigate('/login', { state: { loginType: option }})
     setIsDropdownOpen(false);
   };
 
@@ -27,13 +27,13 @@ const DropdownButton = () => {
       {isDropdownOpen && (
         <div className="absolute top-full right-0 mt-2 w-40 bg-white border border-gray-300 rounded-md shadow-lg">
           <button
-            onClick={() => handleSelection('/login')}
+            onClick={() => handleSelection('member')}
             className="block w-full px-4 py-2 text-gray-700 hover:bg-gray-100 text-left"
           >
             Member
           </button>
           <button
-            onClick={() => handleSelection('/company-login')}
+            onClick={() => handleSelection('company')}
             className="block w-full px-4 py-2 text-gray-700 hover:bg-gray-100 text-left"
           >
             Company

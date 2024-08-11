@@ -4,7 +4,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; // Import the CSS for react-toastify
 import Landing from './components/landing'; // Adjust the import paths
 import SignUpPage from './components/signup';
-import Login from './components/memberLogin';
+import Login from './components/login';
 import JobForm from './components/jobForm';
 import Home from './components/home';
 
