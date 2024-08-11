@@ -1,23 +1,19 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import DropdownButton from './loginDropdown';
 
 const Landing = () => {
 
-    const navigate = useNavigate();
 
-    const navigateLogin = () => {
-        navigate('/login')
-    };
   return (
     <div
       style={{ backgroundImage: 'url(/landing-bg.png)' }}
       className="min-h-screen bg-cover bg-no-repeat flex flex-col"
     >
-      <div className="relative flex min-h-screen">
+      <div className="relative flex flex-col min-h-screen">
         {/* Button */}
-        <button onClick={navigateLogin} className="absolute top-4 right-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
-          Login
-        </button>
+        <div className="absolute top-4 right-4">
+          <DropdownButton />
+        </div>
 
         {/* Text Area */}
         <div className="w-2/5  pt-10 ps-10">

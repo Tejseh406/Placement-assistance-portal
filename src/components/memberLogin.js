@@ -2,12 +2,14 @@ import React from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import Input from './input'; // Adjust the path based on your file structure
 import { toast } from 'react-toastify'; // For toast notifications
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const methods = useForm({
     mode: 'onTouched',
   });
+
+  const navigate = useNavigate();
 
   const {
     handleSubmit,
@@ -17,7 +19,9 @@ const Login = () => {
   const onSubmit = async (data) => {
     console.log(data);
     // Handle login logic here
+    localStorage.setItem('email',data.email)
     toast.success("Login successful!");
+    navigate('/home')
   };
 
   return (
